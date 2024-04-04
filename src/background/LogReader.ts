@@ -28,7 +28,7 @@ const queue: IFileReaderQueue[] = []
 const msgRegex = /^\[ (?<datetime>\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}) \] (?<username>[^>]+) > (?<message>.+)/
 const LOCAL_FILE_NAMES = ["Local", "Lokal", "Локальный"]
 const DOCUMENTS_PATH = app.getPath("documents")
-export const EVE_LOG_FOLDER = [DOCUMENTS_PATH, "EVE", "logs", "Chatlogs/"].join("/")
+export const EVE_LOG_FOLDER = [DOCUMENTS_PATH, "EVE", "logs", "Chatlogs\\"].join("\\")
 
 export default class LogListener {
 	private channels: string[] = []
