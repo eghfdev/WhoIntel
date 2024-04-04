@@ -166,7 +166,7 @@ export default class AuthEVE {
 		const signingKey = key.getPublicKey()
 
 		jwt.verify(access_token, signingKey, {
-			issuer: "login.eveonline.com",
+			issuer: "https://login.eveonline.com",
 		})
 
 		return token
