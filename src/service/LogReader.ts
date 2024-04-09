@@ -111,7 +111,7 @@ class LogReader {
 	}
 
 	private secureLogHandler(logEntry: ILogEntry) {
-		const words = logEntry.message.toUpperCase().split(" ")
+		const words = logEntry.message.split(" ")
 
 		logEntry.secure = {
 			question: false,
@@ -128,6 +128,8 @@ class LogReader {
 				words.splice(index, 1)
 			}
 		})
+
+		words.map(word=>{ return word.toUpperCase() })
 
 		if (
 			words.includes("CLR?")
