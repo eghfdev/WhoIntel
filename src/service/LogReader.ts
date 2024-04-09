@@ -88,6 +88,10 @@ class LogReader {
 	}
 
 	private localLogHandler(logEntry: ILogEntry) {
+
+		//log.info("localLogHandler logEntry.sender:", logEntry.sender)
+		//log.info("localLogHandler logEntry.message:", logEntry.message)
+
 		if (!LOCAL_CHANNEL_CHANGE_SYSTEM_SENDER_PREFIX.includes(logEntry.sender)) return
 
 		for (let i = 0; i < LOCAL_CHANNEL_CHANGE_SYSTEM_PREFIX.length; i++) {
@@ -119,17 +123,28 @@ class LogReader {
 			boost: false,
 		}
 
+		let prefix = ""
 		words.forEach((word, index) => {
-			word = word.replace(/\*/g, '')
+			word = word.replace(/\*/g, "")
 
-			const system = systemManager.getSystemByName(word)
+			let system = systemManager.getSystemByName(word)
+			if (!system && prefix.length) {
+				system = systemManager.getSystemByName(prefix + " " + word)
+			}
 			if (system) {
 				logEntry.systems.push(system)
 				words.splice(index, 1)
+				prefix = ""
+			} else {
+				prefix = word
 			}
 		})
 
-		words.map(word=>{ return word.toUpperCase() })
+		log.info("words", words)
+
+		words.map(word => {
+			return word.toUpperCase()
+		})
 
 		if (
 			words.includes("CLR?")
