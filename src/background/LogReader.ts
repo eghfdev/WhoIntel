@@ -79,10 +79,12 @@ export default class LogListener {
 					}
 
 					const filename = path.basename(filepath)
-					const channel = filename.substring(0, filename.length - 31)
+					//const channel = filename.substring(0, filename.length - 31)
+					const filenameParts = filename.split("_")
+					const channel = filenameParts.splice(0,filenameParts.length - 3).join("_")
 
 					if (!this.channels.includes(channel)) {
-						log.info("LogListener: File ignored", filepath)
+						log.info(`LogListener: Channel[${channel}] File ignored: `, filepath)
 						return
 					}
 
