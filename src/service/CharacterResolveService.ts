@@ -5,6 +5,7 @@ import subDays from "date-fns/subDays"
 import addHours from "date-fns/addHours"
 import * as log from "electron-log"
 import {firstValueFrom} from "rxjs"
+import characterManager from "@/service/CharacterManager";
 
 class CharacterResolveService {
 	constructor() {
@@ -68,7 +69,7 @@ class CharacterResolveService {
 
 			// If expired
 			try {
-				const {data: {character: apiIDs}} = await firstValueFrom(api.searchCharacter$(name))
+				const {data: {character: apiIDs}} = characterManager.activeCharacter ? await firstValueFrom(characterManager.activeCharacter.searchCharacter$(name)) : {data: {character: null}}
 				if (!apiIDs || apiIDs.length === 0) {
 					const dbCharNew: ICharacterExport = {
 						id: 0,
@@ -106,7 +107,7 @@ class CharacterResolveService {
 		}
 
 		try {
-			const {data: {character: apiIDs}} = await firstValueFrom(api.searchCharacter$(name))
+			const {data: {character: apiIDs}} = characterManager.activeCharacter ? await firstValueFrom(characterManager.activeCharacter.searchCharacter$(name)) : {data: {character: null}}
 			if (!apiIDs || apiIDs.length === 0) {
 				const dbCharNew: ICharacterExport = {
 					id: 0,

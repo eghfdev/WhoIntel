@@ -72,18 +72,6 @@ export class EVEApiPublic {
 		)
 	}
 
-	searchCharacter$(name: string): AxiosObservable<{ character: Array<number> }> {
-		return this.axios$.get<{ character: Array<number> }>("search/", {
-			params: {
-				categories: "character",
-				search: name,
-				strict: true,
-			}
-		}).pipe(
-			retryBackoff(regularRetryBackoffConfig),
-		)
-	}
-
 	getCharacter$(id: number): AxiosObservable<IAPICharacter> {
 		return this.axios$.get<IAPICharacter>(`characters/${id}/`).pipe(
 			retryBackoff(regularRetryBackoffConfig),
@@ -103,6 +91,18 @@ export class EVEApi extends EVEApiPublic {
 			store.commit("setError", `You need logout and login with new permission scope (${scope})`)
 			throw new Error(`API scope needed: ${scope}`)
 		}
+	}
+
+	searchCharacter$(name: string): AxiosObservable<{ character: Array<number> }> {
+		return this.axios$.get<{ character: Array<number> }>(`characters/${this.auth.character_id}/search/`, {
+			params: {
+				categories: "character",
+				search: name,
+				strict: true,
+			}
+		}).pipe(
+			retryBackoff(regularRetryBackoffConfig),
+		)
 	}
 
 	character_online$(): AxiosObservable<API_CHARACTER_ONLINE> {
