@@ -40,7 +40,7 @@ export default class RegionMapCharacterMarker extends Vue {
 					cy: system.mapCoordinates.center_y,
 					rx: (system.mapCoordinates.width / 2) + 4,
 					ry: (system.mapCoordinates.height / 2) + 4,
-					color: character.name === characterManager.activeCharacter?.name ? "#8B008D" : "#FB00FF",
+					color: character.name === characterManager.activeCharacter?.name ? "#FB00FF" : "#8B008D",
 					name: character.name
 				})
 			})
