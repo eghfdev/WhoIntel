@@ -2,7 +2,8 @@ import differenceInSeconds from "date-fns/differenceInSeconds"
 import systemManager from "@/service/SystemManager"
 import settingsService from "@/service/settings"
 import round from "lodash/round"
-import EVERegion from "@/lib/EVERegion";
+import EVERegion from "@/lib/EVERegion"
+import * as log from "electron-log"
 
 interface ALARM_COLORS {
 	seconds: number
@@ -205,7 +206,7 @@ export default class EVESystem {
 			this.setRectColor(`rgb(${system_color},0,0)`)
 		} else {
 			system_color = 255 - (system_kills * 255 / max)
-			this.setTextColor(system_color > 127 ? COLOR_BLACK : COLOR_WHITE )
+			this.setTextColor(system_color > 127 ? COLOR_BLACK : COLOR_WHITE)
 			this.setRectColor(`rgb(255,${system_color},${system_color})`)
 		}
 
@@ -328,10 +329,8 @@ export default class EVESystem {
 	}
 
 	public setAlarm(date: Date = new Date()): boolean {
-		if (
-			this.lastAlarmTime
-			&& this.lastAlarmTime > date
-		) {
+		if (this.lastAlarmTime && this.lastAlarmTime > date) {
+			log.info(`setAlarm: lastAlarmTime[${this.lastAlarmTime}] date[${date}] skip:`, (this.lastAlarmTime && this.lastAlarmTime > date))
 			return false
 		}
 

@@ -90,7 +90,7 @@ export default class LogWatcher extends EventEmitter {
 
 				const diffH = differenceInHours(nowDate, stats.mtime)
 				if (diffH > 24) {
-					log.info(`LogWatcher:init:ignoring:diffH=${diffH}:`, filepath)
+					//log.info(`LogWatcher:init:ignoring:diffH=${diffH}:`, filepath)
 					return
 				}
 

@@ -140,7 +140,7 @@ class LogReader {
 			}
 		})
 
-		log.info("words", words)
+		//log.info("words", words)
 
 		words.map(word => {
 			return word.toUpperCase()

@@ -84,7 +84,7 @@ export default class LogListener {
 					const channel = filenameParts.splice(0,filenameParts.length - 3).join("_")
 
 					if (!this.channels.includes(channel)) {
-						log.info(`LogListener: Channel[${channel}] File ignored: `, filepath)
+						//log.info(`LogListener: Channel[${channel}] File ignored: `, filepath)
 						return
 					}
 
@@ -100,7 +100,7 @@ export default class LogListener {
 						channel: channel,
 						character: null,
 					})
-					log.info("LogListener: added", filepath, stats.size)
+					log.info(`LogListener: Channel[${channel}] added`, filepath, stats.size)
 				}
 			)
 			.on("change", async (filepath, stats) => {
