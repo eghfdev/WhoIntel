@@ -45,7 +45,7 @@
 					<p>app: {{ version.app }}<br>
 						electron: {{ version.electron }}<br>
 						website: <a @click.prevent.stop="openExternal('https://whointel.space/')" href="https://whointel.space/">whointel.space</a><br>
-						sources: <a @click.prevent.stop="openExternal('https://github.com/whointel/WhoIntel')" href="https://github.com/whointel/WhoIntel">GitHub</a><br>
+						sources: <a @click.prevent.stop="openExternal('https://github.com/eghfdev/WhoIntel')" href="https://github.com/eghfdev/WhoIntel">GitHub</a><br>
 					</p>
 
 					<p v-if="status === UPDATE_STATUSES.CHECKING_FOR_UPDATE">
@@ -63,7 +63,7 @@
 						<v-btn @click="downloadUpdate" v-if="isPlatformWindows">
 							{{ $t("update.download") }}
 						</v-btn>
-						<a v-else @click.prevent.stop="openExternal('https://github.com/whointel/WhoIntel/releases')" href="https://github.com/whointel/WhoIntel/releases">
+						<a v-else @click.prevent.stop="openExternal('https://github.com/eghfdev/WhoIntel/releases')" href="https://github.com/eghfdev/WhoIntel/releases">
 							{{ $t("update.download") }}
 						</a>
 					</p>
