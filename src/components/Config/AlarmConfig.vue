@@ -4,7 +4,7 @@
 			append-icon="mdi-plus"
 			prepend-icon="mdi-minus"
 			:min="0"
-			:max="5"
+			:max="25"
 			:step="1"
 			ticks
 			v-model="settings.alarmDistance"
