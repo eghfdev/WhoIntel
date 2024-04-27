@@ -20,12 +20,25 @@ import Character from "@/lib/Character"
 export default class RegionMapCharacterMarker extends Vue {
 	get characterMarkers(): any[] {
 		if (!systemManager.currentRegion) return []
-
 		const systemsToCharacters = characterManager.regionSystemToChars[systemManager.currentRegion.id]
+
+		// to highlight neighbour regions too
+		if (characterManager.activeCharacter && characterManager.activeCharacter.location) {
+			characterManager.activeCharacter.location.neighbourRegions.forEach(neighbourRegionId => {
+				const systemsToCharactersNeighbour = characterManager.regionSystemToChars[neighbourRegionId]
+				if (systemsToCharactersNeighbour) {
+					for (const [systemID, characters] of Object.entries(systemsToCharactersNeighbour)) {
+						if (characters) {
+							systemsToCharacters[systemID] = characters
+						}
+					}
+				}
+			})
+		}
 
 		if (!systemsToCharacters) return []
 
-		let result: any[] = []
+		const result: any[] = []
 
 		for (const [, characters] of Object.entries(systemsToCharacters)) {
 			characters.forEach(character => {
